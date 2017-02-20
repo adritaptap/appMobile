@@ -1,3 +1,20 @@
+
+/* Empty. Add your own CSS if you like */
+
+.font-profil-detail {
+  width: 100%;
+  height: 50% ;
+  background-size: 100%;
+}
+
+.fond {
+width: 100%;
+}
+
+.navigationBar {
+	background-color: rgba(255, 255, 255, 0.7);
+}
+
 .bubble{
   border-radius: 5px;
   display: inline-block;
@@ -43,4 +60,3 @@
 .me::before {
   background-color: #40A8FC;
   right: -9px;
-}
