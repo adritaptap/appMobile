@@ -6,17 +6,17 @@ navigation history that also transitions its views in and out.
 <ion-tabs class="tabs-icon-top tabs-color-active-positive navigationBar">
 
   <!-- Map Tab -->
-  <ion-tab title="Map" icon-off="ion-ios-world-outline" icon-on="ion-ios-world" href="#/tab/dash"c>
+  <ion-tab title="Map" icon-off="ion-ios-world-outline" icon-on="ion-ios-world" ui-sref="tab.dash">
     <ion-nav-view name="tab-dash"></ion-nav-view>
   </ion-tab>
 
   <!-- Friends Tab -->
-  <ion-tab title="Amis" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" href="#/tab/chats">
-    <ion-nav-view name="tab-chats"></ion-nav-view>
+  <ion-tab title="Amis" icon-off="ion-ios-person-outline" icon-on="ion-ios-person" ui-sref="tab.friendsList">
+    <ion-nav-view name="tab-friends"></ion-nav-view>
   </ion-tab>
 
   <!-- Setting Tab -->
-  <ion-tab title="Paramètres" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" href="#/tab/account">
+  <ion-tab title="Paramètres" icon-off="ion-ios-gear-outline" icon-on="ion-ios-gear" ui-sref="tab.account">
     <ion-nav-view name="tab-account"></ion-nav-view>
   </ion-tab>
 
