@@ -2,7 +2,8 @@
 <ion-view view-title="{{result.name}}">
   <ion-content class="">
     <div class ="font-profil-detail">
-      <img class="full-image" src="/img/LasoeurdAgathe.jpg">
+      <img class="" src="{{result.avatar}}">
+      <h2>{{result.lastname}} {{result.name}}</h2>
     </div>
 
     <div class="item item-text-wrap row">
@@ -10,7 +11,7 @@
         <i class="icon ion-ios-email" style="font-size: 50px;"></i>
       </div>
       <div class="col col-75 col-center">
-        <p>soeur.agathe@mail.fr</p>
+        <p> {{result.motto}}</p>
       </div>
     </div>
 
@@ -19,7 +20,7 @@
         <i class="icon ion-location" style="font-size: 50px;"></i>
       </div>
       <div class="col col-75 col-center">
-        <p>GRENOBLE</p>
+        <p>{{result.position.lat}} {{result.position.lng}}</p>
       </div>
     </div>
 
@@ -28,7 +29,7 @@
         <i class="icon ion-android-phone-portrait" style="font-size: 50px;"></i>
       </div>
       <div class="col col-75 col-center">
-        <p>06/01/02/03/04</p>
+        <p>{{result.phone}}</p>
       </div>
     </div>
 

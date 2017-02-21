@@ -3,19 +3,17 @@
     <ion-list>
       <ion-item class="list item-remove-animate item-avatar item-icon-right" ng-repeat="result in results"
                 type="item-text-wrap"
-                ui-sref="tab.friendsDetail({friendId : 1 })">
+                ui-sref="tab.friendsDetail({friendId : result.idUser})">
 
-        <img    src="/img/LasoeurdAgathe.jpg">
+        <img    src="{{result.avatar}}">
         <h2>{{result.lastname}} {{result.name}}</h2>
         <label>Adresse : </label>
-        <p>{{result.adress}}</p>
+        <p>{{result.adress}} {{result.position.lng}}</p>
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
           Delete
         </ion-option-button>
       </ion-item>
-
-
     </ion-list>
   </ion-content>
 </ion-view>
