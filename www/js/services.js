@@ -7,11 +7,13 @@ angular.module('starter.services', [])
             .then(function successCallback(response) {
               results = response.data['users'];
               console.log(results);
+              console.log(response);
+
               callback(results);
             });
       },
-      post: function(callback){
-          $http.post('http://carbillet.net/api-digitalGrenoble/credentials', data)
+      post: function(user){
+          $http.post('http://carbillet.net/api-digitalGrenoble/credentials', { "username": user.login, "password": user.pass })
             .then(function(response) {
               console.log(response);
             })
