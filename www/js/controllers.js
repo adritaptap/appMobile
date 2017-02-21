@@ -2,7 +2,7 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope) {})
 
-.controller('FriendsListCtrl', function($scope, Chats, $http) {
+.controller('FriendsListCtrl', function($scope, Chats,$http) {
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
   // To listen for when this page is active (for example, to refresh data),
@@ -11,30 +11,26 @@ angular.module('starter.controllers', [])
   //$scope.$on('$ionicView.enter', function(e) {
   //});
 
-  $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
-  // };
+  //$scope.results = Chats.all();
+
+  $http({
+    method: 'GET',
+    url: 'http://carbillet.net/api-digitalGrenoble/users/'
+    }).then(
+      function successCallback(response) {
+        console.log('data success');
+        results = response.data['users'];
+        $scope.results = results;
+        console.log(results);
+        },
+      function errorCallback(response) {
+        console.log('data error');
+      })
+
+
   $scope.remove = function(chat) {
       Chats.remove(chat);
     };
-  $scope.results = "";
-  $http.get('http://carbillet.net/api-digitalGrenoble/users/')
-    .success(function(data, status, headers,config){
-      console.log('data success');
-      console.log(data['users'][0]);
-      $scope.results = data['users'];
-
-    })
-    .error(function(data, status, headers,config){
-      console.log('data error');
-    })
-    .then(function(result){
-      things = results.data;
-    });
-
-
-
 })
 
 .controller('FriendDetailCtrl', function($scope, Chats) {
