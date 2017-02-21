@@ -1,39 +1,59 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope) {})
+.controller('DashCtrl', function($scope, NgMap, httpService) {
+
+  httpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
 
 
-.controller('ChatsCtrl', ['$scope','$http', function($scope, $http) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
-  $http.get('http://carbillet.net/api-digitalGrenoble/users/')
-  .then(function successCallback(response) {
-
-    $scope.users = response.data.users;
-    console.log(response);  
-
-
-  }, function errorCallback(response) {
-    console.log("error");
+    NgMap.getMap().then(function(map) {
+    // console.log(map.getCenter());
+    // console.log('markers', map.markers);
+    // console.log('shapes', map.shapes);
+    $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMrTz3eJddGzQo3mq1eYzrf91e7AyuX-I";
   });
 
-  // $scope.chats = Chats.all();
-  // $scope.remove = function(chat) {
-  //   Chats.remove(chat);
-  // };
+  });
+})
+
+
+.controller('UsersCtrl', ['$scope', 'httpService', function($scope, httpService) {
+
+
+  httpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
+    console.log(response.users);
+  });
+
+
+
 }])
 
-.controller('ChatDetailCtrl', function($scope, $stateParams, Chats) {
-  $scope.chat = Chats.get($stateParams.chatId);
-})
+.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', function($scope, $http, $stateParams, httpService) {
+
+
+  var users = httpService.asyncGet().then(function (response) {
+    var users = response.users;
+
+
+
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].idUser == parseInt($stateParams.userId)) {
+
+       $scope.user = users[i];
+     }
+   }
+
+ }); 
+
+}])
 
 .controller('SettingCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
+})
+
+.controller('LoginCtrl', function($scope) {
+  
 });

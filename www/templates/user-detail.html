@@ -4,11 +4,19 @@
   The FriendsCtrl pulls data from the Friends service (service.js)
   The Friends service returns an array of friend data
 -->
-<ion-view view-title="{{chat.name}}">
+<ion-view view-title="{{user.name}} {{user.lastname}}">
   <ion-content class="padding">
-    <img ng-src="{{chat.face}}" style="width: 64px; height: 64px">
+    <img ng-src="{{user.avatar}}" style="width: 64px; height: 64px">
+    <p>{{user.name}} {{user.lastname}}</p>
     <p>
-      {{chat.lastText}}
+      {{user.age}} ans
     </p>
+    <p>
+      adresse: {{user.adress}}
+    </p>
+    <p>
+      téléphone: {{user.phone}}
+    </p>
+
   </ion-content>
 </ion-view>
