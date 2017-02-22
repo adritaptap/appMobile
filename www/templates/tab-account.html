@@ -5,7 +5,28 @@
 			<ion-toggle  ng-model="settings.enableFriends" toggle-class="toggle-assertive" class="item item-icon-left"	>
 				<i class="icon ion-log-out"></i> Se deconnecter
 			</ion-toggle>
+			<div class="list">
+			<form ng-controller="AccountCtrl" ng-submit="update()">
 
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">ADRESSE</span>
+					<input type="text" name="adress" ng-model="result.adress" placeholder="votre adresse">
+				</label>
+
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">AGE</span>
+					<input type="text" name="age" ng-model="result.age" placeholder="votre age">
+				</label>
+
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">TELEPHONE</span>
+					<input type="text" name="phone" ng-model="result.phone" placeholder="votre téléphone">
+				</label>
+
+        <button class="button button-full button-positive">MISE A JOUR</button>
+      </form>
+		</div>
 		</ion-list>
 	</ion-content>
+
 </ion-view>

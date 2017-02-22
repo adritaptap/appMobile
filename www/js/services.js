@@ -6,19 +6,41 @@ angular.module('starter.services', [])
           $http.get('http://carbillet.net/api-digitalGrenoble/users/')
             .then(function successCallback(response) {
               results = response.data['users'];
-              console.log(results);
-              console.log(response);
-
+              //console.log(results);
+              //console.log(response);
               callback(results);
             });
       },
+
+      getOne: function(id , callback){
+          $http.get('http://carbillet.net/api-digitalGrenoble/users/')
+            .then(function successCallback(response) {
+              results = response.data['users'];
+              for(var i = 0 ; i < results.length ; i ++){
+                if(results[i].idUser == id){
+                  console.log(results[i]);
+                  callback(results[i]);
+                }
+              }
+            });
+      },
+
       post: function(login , callback){
           $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', {json:login})
             .then(function(response) {
-              console.log(login);
+              //console.log(login);
+              callback(response.data);
+            })
+      },
+
+      put: function(update, callback){
+        $http.put('http://carbillet.net/api-digitalGrenoble/users/', {json:update})
+            .then(function(response) {
+              //console.log(update);
               callback(response.data);
             })
       }
+
     }
   }]);
 //

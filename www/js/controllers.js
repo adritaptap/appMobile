@@ -6,38 +6,13 @@ angular.module('starter.controllers', [])
 
   HttpRequest.get(function(data){
     $scope.results = data;
-  })
-
-  // $scope.remove = function(chat) {
-  //     Chats.remove(chat);
-  //   };
-
-  // $http({
-  //   method: 'GET',
-  //   url: 'http://carbillet.net/api-digitalGrenoble/users/'
-  //   }).then(
-  //     function successCallback(response) {
-  //       console.log('data success');
-  //       results = response.data['users'];
-  //       $scope.results = results;
-  //       console.log(results);
-  //       },
-  //     function errorCallback(response) {
-  //       console.log('data error');
-  //     })
-
-
+  });
 })
 
 .controller('FriendDetailCtrl', function($scope, HttpRequest, $stateParams) {
-  HttpRequest.get(function(data){
-    for(var i = 0 ; i < data.length ; i ++){
-      console.log($stateParams.friendId);
-      if(data[i].idUser == parseInt($stateParams.friendId)){
-        $scope.result =  data[i];
-      }
-    }
-  })
+  HttpRequest.getOne($stateParams.friendId, function(data){
+    $scope.result =  data;
+  });
 })
 
 .controller('loginCtrl',function($scope, HttpRequest, $state, $ionicPopup){
@@ -60,12 +35,27 @@ angular.module('starter.controllers', [])
 })
 
 .controller('ChatCtrl', function($scope, HttpRequest) {
-
 })
 
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, HttpRequest, $state) {
   $scope.settings = {
     enableFriends: true
   };
+
+  HttpRequest.getOne(30, function(data){
+    $scope.result =  data;
+  });
+
+  $scope.update = function() {
+    testJson =  {"idUser": 30,
+                "adress": $scope.result.adress,
+                "age": $scope.result.age,
+                "phone": $scope.result.phone
+              };
+    HttpRequest.put(testJson , function(data){
+      $state.go('tab.friendsList');
+    });
+  }
+
 });
