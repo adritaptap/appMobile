@@ -1,17 +1,15 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, NgMap, httpService) {
+.controller('DashCtrl', function($scope, httpService, NgMap) {
+  NgMap.getMap().then(function(map) {
+    console.log(map.getCenter());
+    console.log('markers', map.markers);
+    console.log('shapes', map.shapes);
 
+
+  });
   httpService.asyncGet().then(function (response) {
     $scope.users = response.users;
-
-
-    NgMap.getMap().then(function(map) {
-    // console.log(map.getCenter());
-    // console.log('markers', map.markers);
-    // console.log('shapes', map.shapes);
-    $scope.googleMapsUrl="https://maps.googleapis.com/maps/api/js?key=AIzaSyBMrTz3eJddGzQo3mq1eYzrf91e7AyuX-I";
-  });
 
   });
 })
@@ -29,22 +27,31 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', function($scope, $http, $stateParams, httpService) {
+.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', 'NgMap', function($scope, $http, $stateParams, httpService, NgMap) {
+
+ NgMap.getMap().then(function(map) {
+  console.log(map.getCenter());
+  console.log('markers', map.markers);
+  console.log('shapes', map.shapes);
+});
 
 
-  var users = httpService.asyncGet().then(function (response) {
-    var users = response.users;
+ var users = httpService.asyncGet().then(function (response) {
+  var users = response.users;
 
 
 
-    for (var i = 0; i < users.length; i++) {
-      if (users[i].idUser == parseInt($stateParams.userId)) {
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].idUser == parseInt($stateParams.userId)) {
 
-       $scope.user = users[i];
-     }
+     $scope.user = users[i];
+
+
+
    }
+ }
 
- }); 
+}); 
 
 }])
 
@@ -54,6 +61,11 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope) {
-  
+.controller('LoginCtrl', function($scope, $http) {
+
+    $scope.username;
+    $scope.password;
+    
+    post(url, data)
+
 });

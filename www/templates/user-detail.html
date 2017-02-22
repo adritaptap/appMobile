@@ -6,17 +6,32 @@
 -->
 <ion-view view-title="{{user.name}} {{user.lastname}}">
   <ion-content class="padding">
-    <img ng-src="{{user.avatar}}" style="width: 64px; height: 64px">
-    <p>{{user.name}} {{user.lastname}}</p>
-    <p>
-      {{user.age}} ans
-    </p>
-    <p>
-      adresse: {{user.adress}}
-    </p>
-    <p>
-      téléphone: {{user.phone}}
-    </p>
 
-  </ion-content>
-</ion-view>
+    <ion-item class="item-remove-animate" type="item-text-wrap">
+      <img ng-src="{{user.avatar}}" style="width: 64px; height: 64px">
+      <p>{{user.name}} {{user.lastname}}</p>
+      <p>
+        {{user.age}} ans
+      </p>
+      <p>
+        adresse: {{user.adress}}
+      </p>
+      <p>
+        téléphone: {{user.phone}}
+      </p>
+    </ion-item>
+
+
+
+      <ng-map id="map" class="scroll" center="45.18554, 5.7282689" data-tap-disabled="true">
+
+        <marker position="[{{user.position.lat}}, {{user.position.lng}}]" title='{{user.name}} {{user.lastname}}' on-click="myfunc()"></marker>
+
+        <marker position="current-location" title='vous etes ici' on-click="myfunc()"></marker>
+
+      </ng-map>
+
+
+    </ion-content>
+  </ion-view>
+45.18554, 5.7282689

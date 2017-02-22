@@ -2,8 +2,8 @@
 /* Empty. Add your own CSS if you like */
 
 .fond {
-width: 100%;
-filter: blur(5px);
+  width: 100%;
+  filter: blur(5px);
 }
 
 #map {
@@ -28,4 +28,12 @@ filter: blur(5px);
   vertical-align: top;
 }
 
+body, html { 
+  height: 100%;.
+   margin: 0;
+ }
 
+.google-map {  
+  height: 60%;
+  padding: 1%; 
+}
