@@ -4,19 +4,22 @@
 		<ion-list class="list">
 
 
-			<form ng-controller="LoginCtrl">
+			
 				<div class="list">
 					<label class="item item-input">
-					<span class="input-label">Username</span>
-						<input type="text" ng-model="username" >
+						<span class="input-label">Username</span>
+						<input type="text" name="username" ng-model="username">
 					</label>
-					<label class="item item-input">
+					<label class="item item-input" >
 						<span class="input-label">Password</span>
-						<input type="password">
+						<input type="password" name="password" ng-model="mpd">
 					</label>
-					<ion-button type="submit" class="button button-block button-positive">Envoyer</ion-button>
+					<ion-button ng-click="submit()" type="submit" name="submit" class="button button-block button-positive">Envoyer</ion-button>
 				</div>
-			</form>
+			
+			
 		</ion-list>
+
+
 	</ion-content>
 </ion-view>

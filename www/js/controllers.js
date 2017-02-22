@@ -63,9 +63,21 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $http) {
 
-    $scope.username;
-    $scope.password;
-    
-    post(url, data)
+  // var data = {username:$scope.username, password:$scope.password};
+data = {
+      "username": "adrien.juhem",
+      "password": "adrien"
+    }
 
+  $scope.submit = function() {
+    var url = 'http://carbillet.net/api-digitalGrenoble/credentials/'; 
+
+
+    console.log(data);
+
+    $http.post(url, data).then(function(response) {
+      console.log(response);
+    });
+
+  };
 });
