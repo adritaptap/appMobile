@@ -31,6 +31,13 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'UsersCtrl'
+
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
@@ -50,47 +57,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
     }
   })
 
-  .state('tab.friendsList', {
-      url: '/friendList',
+  .state('tab.chats', {
+      url: '/chats',
       views: {
-        'tab-friends': {
+        'tab-chat': {
           templateUrl: 'templates/tab-friendsList.html',
-          controller: 'FriendsListCtrl'
+          controller: 'ChatsCtrl'
         }
       }
     })
 
-    .state('tab.friendsDetail', {
-      url: '/friend/:friendId',
+    .state('tab.chat-detail', {
+      url: '/chats/:chatId',
       views: {
-        'tab-friends': {
+        'tab-chat': {
           templateUrl: 'templates/friendDetail.html',
-          controller: 'FriendDetailCtrl'
+          controller: 'ChatDetailCtrl'
         }
       }
     })
 
-    .state('tab.chat', {
-      url: '/friend/chat',
-      views: {
-        'tab-friends':{
-          templateUrl:'templates/tab-chats.html',
-          controller: 'ChatCtrl'
-        }
-      }
-    })
-
-    .state('tab.account', {
-      url: '/account',
-      views: {
-        'tab-account': {
+  .state('tab.account', {
+    url: '/account',
+    views: {
+      'tab-account': {
         templateUrl: 'templates/tab-account.html',
         controller: 'AccountCtrl'
       }
     }
-  });
+  })
+
+
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
 });
