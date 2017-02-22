@@ -40,35 +40,24 @@ angular.module('starter.controllers', [])
   })
 })
 
-.controller('loginCtrl',function($scope, $http){
+.controller('loginCtrl',function($scope, HttpRequest, $state, $ionicPopup){
   $scope.user = {};
+
   $scope.login = function() {
-    var jsonData =  {username: 'jerome.lombard', password: 'jerome'}
-    console.log($scope.user);
-    $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', {json: jsonData})
-          .then(function(response) {
-            console.log(response.data);
+    HttpRequest.post($scope.user , function(data){
+      if(data.statePwdApi == 'ok'){
+        console.log('ok');
+        $state.go('tab.dashboard');
+      }else{
+        console.log('erreur');
+        $ionicPopup.alert({
+          title: 'LOGIN',
+          template: 'Erreur de login !'
           });
+      }
+    })
   };
-
-
 })
-
-// .controller('loginCtrl',function($scope, $http){
-//   $scope.user = {};
-//   $scope.login = function() {
-//     console.log($scope.user);
-//       $http({
-//           method : 'POST',
-//           url : 'http://carbillet.net/api-digitalGrenoble/credentials',
-//           data : $scope.user
-//       }).then(function(response){
-//         console.log(response);
-//       });
-//
-//     }
-// })
-
 
 .controller('ChatCtrl', function($scope, HttpRequest) {
 

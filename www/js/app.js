@@ -31,31 +31,39 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+    .state('login', {
+      url: '/login',
+      templateUrl: 'templates/login.html',
+      controller: 'loginCtrl'
+
+
+    })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
-    abstract: true,
+    // abstract: true,
     templateUrl: 'templates/tabs.html'
   })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.geo', {
-    url: '/geolocalisation',
+  .state('tab.dashboard', {
+    url: '/dashbord',
     views: {
-      'tab-geo': {
+      'tab-board': {
         templateUrl: 'templates/tab-dash.html',
         controller: ''
       }
     }
   })
 
-  .state('tab.login', {
-    url: '/login',
+  .state('tab.geo', {
+    url: '/dashboard',
     views: {
-      'tab-login': {
-        templateUrl: 'templates/login.html',
-        controller: 'loginCtrl'
+      'tab-geo': {
+        templateUrl: 'templates/tab-dash.html',
+        controller: ''
       }
     }
   })
@@ -101,6 +109,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/login');
+  $urlRouterProvider.otherwise('/login');
+
+  
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
+  $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 });

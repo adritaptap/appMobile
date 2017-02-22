@@ -12,10 +12,11 @@ angular.module('starter.services', [])
               callback(results);
             });
       },
-      post: function(user){
-          $http.post('http://carbillet.net/api-digitalGrenoble/credentials', { "username": user.login, "password": user.pass })
+      post: function(login , callback){
+          $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', {json:login})
             .then(function(response) {
-              console.log(response);
+              console.log(login);
+              callback(response.data);
             })
       }
     }
