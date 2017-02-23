@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, httpService, NgMap) {
+.controller('DashCtrl', function($scope, getHttpService, NgMap) {
   NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
     console.log('markers', map.markers);
@@ -8,17 +8,17 @@ angular.module('starter.controllers', [])
 
 
   });
-  httpService.asyncGet().then(function (response) {
+  getHttpService.asyncGet().then(function (response) {
     $scope.users = response.users;
 
   });
 })
 
 
-.controller('UsersCtrl', ['$scope', 'httpService', function($scope, httpService) {
+.controller('UsersCtrl', ['$scope', 'getHttpService', function($scope, getHttpService) {
 
 
-  httpService.asyncGet().then(function (response) {
+  getHttpService.asyncGet().then(function (response) {
     $scope.users = response.users;
     console.log(response.users);
   });
@@ -27,7 +27,7 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', 'NgMap', function($scope, $http, $stateParams, httpService, NgMap) {
+.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'getHttpService', 'NgMap', function($scope, $http, $stateParams, getHttpService, NgMap) {
 
  NgMap.getMap().then(function(map) {
   console.log(map.getCenter());
@@ -36,7 +36,7 @@ angular.module('starter.controllers', [])
 });
 
 
- var users = httpService.asyncGet().then(function (response) {
+ var users = getHttpService.asyncGet().then(function (response) {
   var users = response.users;
 
 
