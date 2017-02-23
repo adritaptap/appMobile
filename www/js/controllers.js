@@ -11,7 +11,6 @@ angular.module('starter.controllers', [])
 //             });
 //         });
 //     }
-//
 // })
 
 .controller('UsersCtrl', function($scope, getUsers){
@@ -50,6 +49,20 @@ angular.module('starter.controllers', [])
   $scope.remove = function(chat) {
       Chats.remove(chat);
     };
+
+  $http.get('http://carbillet.net/api-digitalGrenoble/users/')
+    .success(function(data, status, headers,config){
+      console.log('data success');
+      console.log(data['users'][0]);
+      $scope.results = data['users'];
+
+    })
+    .error(function(data, status, headers,config){
+      console.log('data error');
+    })
+    .then(function(result){
+      things = results.data;
+    });
 
 })
 
