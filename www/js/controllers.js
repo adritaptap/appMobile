@@ -69,7 +69,7 @@ angular.module('starter.controllers', [])
     console.log($scope.username);
 
     var data =
-    { 'username': $scope.username, 
+    { 'username': $scope.username,
     'password': $scope.password
   };
 
@@ -98,3 +98,4 @@ angular.module('starter.controllers', [])
 });
 
 };
+});
