@@ -28,7 +28,7 @@ angular.module('starter.services', [])
       post: function(login , callback){
           $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', {json:login})
             .then(function(response) {
-              //console.log(login);
+              console.log(login);
               callback(response.data);
             })
       },
@@ -39,7 +39,7 @@ angular.module('starter.services', [])
               //console.log(update);
               callback(response.data);
             })
-      }
+      },
 
     }
   }]);

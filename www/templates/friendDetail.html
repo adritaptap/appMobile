@@ -1,22 +1,16 @@
-
 <ion-view view-title="{{result.name}}">
-  <ion-content class="">
-    <div class ="font-profil-detail">
-      <img class="" src="{{result.avatar}}">
-      <h2>{{result.lastname}} {{result.name}}</h2>
+
+  <ion-content scroll="false" class="">
+    <div  style='height : 50%;'>
+      <map  ng-transclude class='google-map' zoom='5' center='map.center'  >
+        <marker position="marker.position" options="marker.options" events="marker.events"></marker>
+      </map>
     </div>
 
+    <h2>{{result.lastname}} {{result.name}}</h2>
     <div class="item item-text-wrap row">
+
       <div class="col">
-        <i class="icon ion-ios-email" style="font-size: 50px;"></i>
-      </div>
-      <div class="col col-75 col-center">
-        <p> {{result.motto}}</p>
-      </div>
-    </div>
-
-    <div class="item item-text-wrap row">
-      <div class="col col">
         <i class="icon ion-location" style="font-size: 50px;"></i>
       </div>
       <div class="col col-75 col-center">
@@ -36,7 +30,5 @@
     <button class="button button-full button-positive icon ion-android-chat" ui-sref="tab.chat">
       MESSAGE
     </button>
-
-
   </ion-content>
 </ion-view>

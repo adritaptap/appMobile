@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
+angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', 'ngMaps' ])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -59,11 +59,11 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   })
 
   .state('tab.geo', {
-    url: '/dashboard',
+    url: '/geo',
     views: {
       'tab-geo': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: ''
+        templateUrl: 'templates/tab-geo.html',
+        controller: 'geoCtrl'
       }
     }
   })
@@ -111,7 +111,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services'])
   // if none of the above states are matched, use this as the fallback
   $urlRouterProvider.otherwise('/login');
 
-  
   $httpProvider.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
   $httpProvider.defaults.headers.put['Content-Type'] = 'application/x-www-form-urlencoded;charset=utf-8';
 });

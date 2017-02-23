@@ -1,5 +1,9 @@
-<ion-view view-title="Chats">
+<ion-view view-title="Liste des utilisateurs">
   <ion-content>
+    <ion-refresher
+      pulling-text="Pull to refresh..."
+      on-refresh="doRefresh()">
+    </ion-refresher>
     <ion-list>
       <ion-item class="list item-remove-animate item-avatar item-icon-right" ng-repeat="result in results"
                 type="item-text-wrap"

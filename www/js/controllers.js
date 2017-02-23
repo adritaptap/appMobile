@@ -7,11 +7,48 @@ angular.module('starter.controllers', [])
   HttpRequest.get(function(data){
     $scope.results = data;
   });
+
+  $scope.doRefresh = function(){
+    HttpRequest.get(function(data){
+      $scope.results = data;
+      $scope.$broadcast('scroll.refreshComplete');
+    });
+  }
 })
 
 .controller('FriendDetailCtrl', function($scope, HttpRequest, $stateParams) {
   HttpRequest.getOne($stateParams.friendId, function(data){
     $scope.result =  data;
+    console.log(data.position.lat);
+
+  $scope.map = {
+        center: [(data.position.lat), (data.position.lng)]
+      }
+  $scope.marker = {
+        position: [(data.position.lat), (data.position.lng)]
+      }
+    });
+})
+
+.controller('geoCtrl',function($scope, HttpRequest){
+
+  HttpRequest.get(function(data){
+    var position = [];
+
+    angular.forEach(data, function(value, key) {
+      temp = null;
+      if (value.position!=null){
+        temp = {
+          position : [value.position.lat, value.position.lng]
+        };
+        this.push(temp);
+      }
+    }, position);
+
+    $scope.positions = position;
+    $scope.map = {
+      center: [45.166672,5.71667]
+    }
   });
 })
 
@@ -21,7 +58,7 @@ angular.module('starter.controllers', [])
   $scope.login = function() {
     HttpRequest.post($scope.user , function(data){
       if(data.statePwdApi == 'ok'){
-        console.log('ok');
+        console.log(data);
         $state.go('tab.dashboard');
       }else{
         console.log('erreur');
