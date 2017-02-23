@@ -3,17 +3,25 @@ angular.module('starter.controllers', [])
 .controller('DashCtrl', function($scope, httpService, NgMap, $cookies, $state) {
   if($cookies.get('cookieSession')) {
 
-    NgMap.getMap().then(function(map) {
-      console.log(map.getCenter());
-      console.log('markers', map.markers);
-      console.log('shapes', map.shapes);
+    NgMap.getMap();
+      
 
-
-    });
     httpService.asyncGet().then(function (response) {
       $scope.users = response.users;
 
+      var compteUser = [];
+    for (var i = 0; i < $scope.users.length; i++) {
+          compteUser.push(i);      
+    }
+      $scope.compteur = compteUser;
+     
+      $scope.getNumber = function() {
+        console.log('hello');
+      }
+
+
     });
+
   }
   else {
 
@@ -35,11 +43,7 @@ angular.module('starter.controllers', [])
 
 .controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', 'NgMap', function($scope, $http, $stateParams, httpService, NgMap) {
 
- NgMap.getMap().then(function(map) {
-  console.log(map.getCenter());
-  console.log('markers', map.markers);
-  console.log('shapes', map.shapes);
-});
+ NgMap.getMap();
 
 
  var users = httpService.asyncGet().then(function (response) {
@@ -59,7 +63,7 @@ angular.module('starter.controllers', [])
 
 }])
 
-.controller('SettingCtrl', function($scope, $http, $location,   httpService, $cookies, $state) {
+.controller('SettingCtrl', function($scope, $http, $location, $http, httpService, $cookies, $state) {
   // settinf logout at off
   $scope.settings = {
     enableFriends: false
