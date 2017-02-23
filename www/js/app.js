@@ -59,9 +59,9 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
   .state('tab.chats', {
       url: '/chats',
       views: {
-        'tab-chat': {
+        'tab-chats': {
           templateUrl: 'templates/tab-friendsList.html',
-          controller: 'ChatsCtrl'
+          controller: 'UsersCtrl'
         }
       }
     })
@@ -71,7 +71,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
       views: {
         'tab-chat': {
           templateUrl: 'templates/friendDetail.html',
-          controller: 'ChatDetailCtrl'
+          controller: 'UsersDetailCtrl'
         }
       }
     })

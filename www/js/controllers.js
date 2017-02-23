@@ -40,16 +40,13 @@ angular.module('starter.controllers', [])
 
 
 
-  for (var i = 0; i < users.length; i++) {
-    if (users[i].idUser == parseInt($stateParams.userId)) {
+    for (var i = 0; i < users.length; i++) {
+      if (users[i].idUser == parseInt($stateParams.userId)) {
 
-     $scope.user = users[i];
-
-   }
- }
-
-});
-
+        $scope.user = users[i];
+      }
+    }
+  });
 }])
 
 .controller('SettingCtrl', function($scope) {
