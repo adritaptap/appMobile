@@ -1,82 +1,100 @@
 angular.module('starter.controllers', [])
 
-// .controller('LoginCtrl', function($scope, LoginService, $ionicPopup, $state) {
-//     $scope.login = function() {
-//         LoginService.loginUser($scope.data.username, $scope.data.password).success(function(data) {
-//             $state.go('tab.dash');
-//         }).error(function(data) {
-//             var alertPopup = $ionicPopup.alert({
-//                 title: 'Login failed!',
-//                 template: 'Please check your credentials!'
-//             });
-//         });
-//     }
-// })
+.controller('DashCtrl', function($scope, httpService, NgMap) {
+  NgMap.getMap().then(function(map) {
+    console.log(map.getCenter());
+    console.log('markers', map.markers);
+    console.log('shapes', map.shapes);
 
-.controller('UsersCtrl', function($scope, getUsers){
-  $scope.submit = function(){
-    $scope.getUsers = getUsers.getData($scope.success, $scope.error);
-  }
 
-  $scope.success = function(data){
-    console.log(data);
-    $scope.username = data.data.username;
-  }
-  $scope.error = function(error){
-    sconole.log(error);
-  }
+  });
+  httpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
+
+  });
 })
 
-.controller('DashCtrl', function($scope) {
 
-})
+.controller('UsersCtrl', ['$scope', 'httpService', function($scope, httpService) {
 
-.controller('FriendsListCtrl', function($scope, Chats) {
-  // With the new view caching in Ionic, Controllers are only called
-  // when they are recreated or on app start, instead of every page change.
-  // To listen for when this page is active (for example, to refresh data),
-  // listen for the $ionicView.enter event:
-  //
-  //$scope.$on('$ionicView.enter', function(e) {
-  //});
 
-  $scope.chats = Chats.all();
+  httpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
+    console.log(response.users);
+  });
 
-  $scope.remove = function(chat) {
-     Chats.remove(chat);
-  };
 
-  $scope.remove = function(chat) {
-      Chats.remove(chat);
-    };
 
-  $http.get('http://carbillet.net/api-digitalGrenoble/users/')
-    .success(function(data, status, headers,config){
-      console.log('data success');
-      console.log(data['users'][0]);
-      $scope.results = data['users'];
+}])
 
-    })
-    .error(function(data, status, headers,config){
-      console.log('data error');
-    })
-    .then(function(result){
-      things = results.data;
-    });
+.controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', 'NgMap', function($scope, $http, $stateParams, httpService, NgMap) {
 
-})
+ NgMap.getMap().then(function(map) {
+  console.log(map.getCenter());
+  console.log('markers', map.markers);
+  console.log('shapes', map.shapes);
+});
 
-.controller('FriendDetailCtrl', function($scope, Chats) {
 
-})
+ var users = httpService.asyncGet().then(function (response) {
+  var users = response.users;
 
-.controller('ChatCtrl', function($scope, Chats) {
 
-})
 
-.controller('AccountCtrl', function($scope) {
+  for (var i = 0; i < users.length; i++) {
+    if (users[i].idUser == parseInt($stateParams.userId)) {
 
+     $scope.user = users[i];
+
+   }
+ }
+
+});
+
+}])
+
+.controller('SettingCtrl', function($scope) {
   $scope.settings = {
     enableFriends: true
   };
+})
+
+.controller('LoginCtrl', function($scope, $http, $ionicPopup, $state) {
+
+  var data = {};
+
+  $scope.submit = function() {
+    var url = 'http://carbillet.net/api-digitalGrenoble/credentials/';
+
+    console.log($scope.username);
+
+    var data =
+    { 'username': $scope.username, 
+    'password': $scope.password
+  };
+
+  console.log({json: data});
+
+  $http.post(url, {json: data}).then(function(response) {
+    console.log(response.data);
+    if (response.data.statePwdApi == 'ok'){
+
+      $state.go('tab.dash');
+    }
+
+    else {
+
+
+
+   var alertPopup = $ionicPopup.alert({
+     title: 'Attention',
+     template: response.data.errorApi
+
+
+   });
+
+
+  }
 });
+
+};
