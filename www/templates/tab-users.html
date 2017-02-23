@@ -1,7 +1,14 @@
 <ion-view view-title="Vous amis">
   <ion-content>
+  <div class="list list-inset">
+  <label class="item item-input">
+    <i class="icon ion-search placeholder-icon"></i>
+    <input type="text" placeholder="Search" ng-model="search">
+  </label>
+</div>
     <ion-list>
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users" type="item-text-wrap" href="#/tab/users/{{user.idUser}}">
+
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users | filter : search" type="item-text-wrap" href="#/tab/users/{{user.idUser}}">
         <img ng-src="{{user.avatar}}">
        
         <h2>{{user.name}}</h2>
