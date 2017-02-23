@@ -23,7 +23,7 @@
 
 
 
-      <ng-map id="map" class="scroll" center="45.18554, 5.7282689" data-tap-disabled="true">
+      <ng-map id="map" class="google-map" center="{{user.position.lat}}, {{user.position.lng}}" data-tap-disabled="true">
 
         <marker position="[{{user.position.lat}}, {{user.position.lng}}]" title='{{user.name}} {{user.lastname}}' on-click="myfunc()"></marker>
 

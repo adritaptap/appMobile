@@ -1,11 +1,39 @@
 <ion-view view-title="Paramètres">
-<img src="img/fond.jpg" class="fond">
 	<ion-content>
 		<ion-list>
-			<ion-toggle  ng-model="settings.enableFriends" toggle-class="toggle-assertive" class="item item-icon-left">
-				<i class="icon ion-log-out"></i> Se deconnecter
+			<ion-toggle  ng-model="settings.enableFriends" toggle-class="toggle-assertive" class="item item-icon-left" ng-click="toogle()">
+				<i class="ion-power"></i> Se deconnecter
 			</ion-toggle>
 
+		</ion-list>
+		<ion-list>
+			<ion-item ng-controller='SettingCtrl'>
+				<img ng-src="{{user.avatar}}" style="width: 64px; height: 64px">
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">First Name</span>
+					<p>{{user.name}}</p>
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Last Name</span>
+					<p>{{user.lastname}}</p>
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Age</span>
+					<p>{{user.age}} ans</p>
+					<input type="text" placeholder="changer" ng-model="age">
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">Adresse</span>
+					<p>{{user.adress}}</p>
+					<input type="text" placeholder="changer" ng-model="adress">
+				</label>
+				<label class="item item-input item-stacked-label">
+					<span class="input-label">telephone</span>
+					<p>{{user.phone}}</p>
+					<input type="text" placeholder="changer" ng-model="phone">
+				</label>
+					<ion-button ng-click="update()" type="submit" name="submit" class="button button-block button-positive">Enregister</ion-button>
+			</ion-item>
 		</ion-list>
 	</ion-content>
 </ion-view>

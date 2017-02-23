@@ -1,10 +1,9 @@
-<ion-view view-title="login">
+<ion-view hide-nav-bar="true" view-title="login">
 
 	<ion-content>
-		<ion-list class="list">
-
-
-			
+		<img class="logo" src="img/logo_loopr_bleu.png">
+		<div class="topmarg">
+			<ion-list class="list">
 				<div class="list" ng-controller='LoginCtrl'>
 					<label class="item item-input">
 						<span class="input-label">Username</span>
@@ -14,14 +13,13 @@
 						<span class="input-label">Password</span>
 						<input type="password" name="password" ng-model="password">
 					</label>
-					<ion-button ng-click="submit()" type="submit" name="submit" class="button button-block button-positive">Envoyer</ion-button>
+					<ion-button ng-click="submit()" type="submit" name="submit" class="button button-block button-positive submitButton">Envoyer</ion-button>
 				</div>
-			<p>{{username}}</p>
-			<p>{{password}}</p>
-			
-		</ion-list>
+			</ion-list>
+		</div>
 
-    </button>
+	</button>
 
-	</ion-content>
+</ion-content>
+
 </ion-view>

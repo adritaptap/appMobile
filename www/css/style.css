@@ -34,6 +34,21 @@ body, html {
  }
 
 .google-map {  
-  height: 60%;
+  height: 50%;
   padding: 1%; 
+}
+.topmarg{
+  margin-top: 50px;
+}
+.logo{
+  margin-left: 25%;
+  margin-right: 25%;
+  width:50%;
+}
+.logoMini {
+  width:20%;
+}
+.submitButton {
+  margin-right: 10px;
+  margin-left: 10px;
 }
