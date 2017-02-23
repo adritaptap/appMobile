@@ -17,7 +17,6 @@ angular.module('starter.controllers', [])
 
 .controller('UsersCtrl', ['$scope', 'getHttpService', function($scope, getHttpService) {
 
-
   getHttpService.asyncGet().then(function (response) {
     $scope.users = response.users;
     console.log(response.users);
