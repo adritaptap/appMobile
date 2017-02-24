@@ -62,19 +62,23 @@ angular.module('starter.controllers', [])
       });
 
 
-
-
   });
 })
 
 .controller('loginCtrl',function($scope, HttpRequest, $state, $ionicPopup){
   $scope.user = {};
-
+  var login = localStorage.getItem("login");
+  console.log(login);
+  if( login == 'ok'){
+    $state.go('tab.dashboard');
+  }
   $scope.login = function() {
     HttpRequest.post($scope.user , function(data){
       if(data.statePwdApi == 'ok'){
-        console.log(data);
+        localStorage.setItem("login",data.statePwdApi);
+        console.log(data.statePwdApi);
         $state.go('tab.dashboard');
+
       }else{
         console.log('erreur');
         $ionicPopup.alert({
@@ -84,6 +88,9 @@ angular.module('starter.controllers', [])
       }
     })
   };
+
+
+
 })
 
 .controller('ChatCtrl', function($scope, HttpRequest) {
@@ -93,6 +100,14 @@ angular.module('starter.controllers', [])
 .controller('AccountCtrl', function($scope, HttpRequest, $state) {
   $scope.settings = {
     enableFriends: true
+  };
+
+  $scope.logout = function(){
+    if($scope.settings.enableFriends == false){
+      localStorage.removeItem("login");
+      $state.go('login');
+
+    }
   };
 
   HttpRequest.getOne(30, function(data){
@@ -108,6 +123,7 @@ angular.module('starter.controllers', [])
     HttpRequest.put(testJson , function(data){
       $state.go('tab.friendsList');
     });
+
   }
 
 });
