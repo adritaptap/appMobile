@@ -1,27 +1,33 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, httpService, NgMap, $cookies, $state) {
+.controller('DashCtrl', function($scope, httpService, NgMap, $cookies, $state, $cordovaGeolocation) {
   if($cookies.get('cookieSession')) {
 
-    NgMap.getMap();
+    $cordovaGeolocation
+    .getCurrentPosition()
+    .then(function (position) {
+      $scope.lat  = position.coords.latitude;
+      $scope.long = position.coords.longitude;
+
+      NgMap.getMap();
       
 
-    httpService.asyncGet().then(function (response) {
-      $scope.users = response.users;
+      httpService.asyncGet().then(function (response) {
+        $scope.users = response.users;
 
-      var compteUser = [];
-    for (var i = 0; i < $scope.users.length; i++) {
+        var compteUser = [];
+        for (var i = 0; i < $scope.users.length; i++) {
           compteUser.push(i);      
-    }
-      $scope.compteur = compteUser;
-     
-      $scope.getNumber = function() {
-        console.log('hello');
-      }
+        }
+        $scope.compteur = compteUser;
+
+        $scope.getNumber = function() {
+          console.log('hello');
+        }
 
 
+      });
     });
-
   }
   else {
 
@@ -48,7 +54,6 @@ angular.module('starter.controllers', [])
 
  var users = httpService.asyncGet().then(function (response) {
   var users = response.users;
-
 
 
   for (var i = 0; i < users.length; i++) {
@@ -95,15 +100,15 @@ angular.module('starter.controllers', [])
   $scope.update = function() {
     var url = 'http://carbillet.net/api-digitalGrenoble/users/'; 
 
-      if(!$scope.adress){
-        $scope.adress = $scope.user.adress;
-      }
-      if(!$scope.age){
-        $scope.age = $scope.user.age;
-      }
-      if(!$scope.phone){
-        $scope.phone = $scope.user.phone;
-      }
+    if(!$scope.adress){
+      $scope.adress = $scope.user.adress;
+    }
+    if(!$scope.age){
+      $scope.age = $scope.user.age;
+    }
+    if(!$scope.phone){
+      $scope.phone = $scope.user.phone;
+    }
 
     var data = 
     {
@@ -130,7 +135,7 @@ angular.module('starter.controllers', [])
 
 .controller('LoginCtrl', function($scope, $http, $ionicPopup, $state, $cookies) {
 
-console.log('je suis dans le controller');
+  console.log('je suis dans le controller');
 //verify if cokkie exist
 
 if(!$cookies.get('cookieSession')) {

@@ -1,7 +1,7 @@
 <ion-view view-title="Retrouvez vos amis">
 
 	<ion-content>
-		<ng-map id="map" class="scroll" center="current-location" zoom="14" data-tap-disabled="true">
+		<ng-map id="map" class="scroll" center="{{lat}},{{long}}" zoom="14" data-tap-disabled="true">
 
 			<div ng-repeat="i in compteur">
 				<custom-marker id="{{i}}" 
