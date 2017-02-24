@@ -1,7 +1,7 @@
 <ion-view view-title="GEOLOCALISATION">
   <ion-content scroll="false" >
   <div  style='height : 100%;'>
-    <map  ng-transclude class='google-map' zoom='10' center='map.center'>
+    <map  ng-transclude class='google-map' zoom='15' center='map.center'>
       <!-- <marker position="marker.position" options="marker.options" events="marker.events"></marker> -->
       <marker ng-repeat="pos in positions" position="pos.position"></marker>
     </map>

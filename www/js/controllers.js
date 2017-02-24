@@ -30,7 +30,7 @@ angular.module('starter.controllers', [])
     });
 })
 
-.controller('geoCtrl',function($scope, HttpRequest){
+.controller('geoCtrl',function($scope, HttpRequest,$cordovaGeolocation){
 
   HttpRequest.get(function(data){
     var position = [];
@@ -46,9 +46,23 @@ angular.module('starter.controllers', [])
     }, position);
 
     $scope.positions = position;
-    $scope.map = {
-      center: [45.166672,5.71667]
-    }
+
+    var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude;
+        var long = position.coords.longitude;
+        $scope.map = {
+          center: [lat,long]
+        }
+      }, function(err) {
+        // error
+      });
+
+
+
+
   });
 })
 
