@@ -45,6 +45,7 @@ angular.module('starter.controllers', [])
       }
     }, position);
 
+
     $scope.positions = position;
 
     var posOptions = {timeout: 10000, enableHighAccuracy: false};
