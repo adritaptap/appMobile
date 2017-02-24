@@ -21,17 +21,16 @@ angular.module('starter.controllers', [])
     $scope.result =  data;
     console.log(data.position.lat);
 
-  $scope.map = {
+    $scope.map = {
         center: [(data.position.lat), (data.position.lng)]
       }
-  $scope.marker = {
+    $scope.marker = {
         position: [(data.position.lat), (data.position.lng)]
       }
     });
 })
 
 .controller('geoCtrl',function($scope, HttpRequest,$cordovaGeolocation){
-
   HttpRequest.get(function(data){
     var position = [];
 
@@ -44,7 +43,6 @@ angular.module('starter.controllers', [])
         this.push(temp);
       }
     }, position);
-
 
     $scope.positions = position;
 
@@ -60,8 +58,6 @@ angular.module('starter.controllers', [])
       }, function(err) {
         // error
       });
-
-
   });
 })
 
@@ -88,9 +84,6 @@ angular.module('starter.controllers', [])
       }
     })
   };
-
-
-
 })
 
 .controller('ChatCtrl', function($scope, HttpRequest) {
@@ -106,7 +99,6 @@ angular.module('starter.controllers', [])
     if($scope.settings.enableFriends == false){
       localStorage.removeItem("login");
       $state.go('login');
-
     }
   };
 
