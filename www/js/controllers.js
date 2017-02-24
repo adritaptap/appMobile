@@ -1,7 +1,7 @@
 angular.module('starter.controllers', [])
 
-.controller('DashCtrl', function($scope, httpService, NgMap, $cookies, $state, $cordovaGeolocation) {
-  if($cookies.get('cookieSession')) {
+.controller('DashCtrl', function($scope, httpService, NgMap, $state, $cordovaGeolocation) {
+  if(storage.getItem('storageSession')) {
 
     $cordovaGeolocation
     .getCurrentPosition()
@@ -62,7 +62,7 @@ angular.module('starter.controllers', [])
 }); 
 }])
 
-.controller('SettingCtrl', function($scope, $http, $location, $http, httpService, $cookies, $state) {
+.controller('SettingCtrl', function($scope, $http, $location, $http, httpService, $state) {
 
   // settinf logout at off
   $scope.settings = {
@@ -74,7 +74,7 @@ angular.module('starter.controllers', [])
     var users = response.users;
 
     for (var i = 0; i < users.length; i++) {
-      if (users[i].idUser == $cookies.getObject('cookieSession').idUserApi) {
+      if (users[i].idUser == storage.getItem('storageSession').idUserApi) {
 
        $scope.user = users[i];
      }
@@ -85,8 +85,8 @@ angular.module('starter.controllers', [])
   $scope.toogle = function() {
 
     if ($scope.settings.enableFriends == true) {
-      $cookies.remove('cookieSession');
-      $state.go('login', {reload: true});
+      storage.removeItem('storageSession');
+      $state.go('login');
     }
   }
 
@@ -105,7 +105,7 @@ angular.module('starter.controllers', [])
 
     var data = 
     {
-      "idUser": $cookies.getObject('cookieSession').idUserApi,
+      "idUser": storage.getItem('storageSession').idUserApi,
       "adress": $scope.adress,
       "age": $scope.age,
       "phone": $scope.phone
@@ -122,10 +122,11 @@ angular.module('starter.controllers', [])
 })
 
 
-.controller('LoginCtrl', function($scope, $http, httpService, $ionicPopup, $state, $cookies) {
+.controller('LoginCtrl', function($scope, $http, httpService, $ionicPopup, $state) {
 
 //verify if cokkie exist
-if(!$cookies.get('cookieSession')) {
+console.log(storage.getItem('storageSession'));
+if(!storage.getItem('storageSession')) {
 
   console.log('pas de cookies');
   var data = {};
@@ -148,10 +149,10 @@ if(!$cookies.get('cookieSession')) {
 
     else {
       console.log('doit redirection');
-      var now = new Date();
-    // this will set the expiration to 12 months
-    exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-    $cookies.putObject('cookieSession', response, {'expires': exp});
+    //   var now = new Date();
+    // // this will set the expiration to 12 months
+    // exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
+    storage.setItem('storageSession', response);
 
     $state.go('tab.dash');
   }

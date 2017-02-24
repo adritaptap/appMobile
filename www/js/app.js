@@ -43,6 +43,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     // Each tab has its own nav history stack:
     .state('login', {
       url: '/login',
+      cache: false,
       templateUrl: 'templates/tab-login.html',
       controller: 'LoginCtrl'  
     })
