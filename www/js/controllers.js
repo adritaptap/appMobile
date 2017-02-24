@@ -11,19 +11,21 @@ angular.module('starter.controllers', [])
 
       NgMap.getMap();
       
-
       httpService.asyncGet().then(function (response) {
         $scope.users = response.users;
 
-        var compteUser = [];
-        for (var i = 0; i < $scope.users.length; i++) {
-          compteUser.push(i);      
-        }
-        $scope.compteur = compteUser;
+        var data = 
+    {
+      "idUser": $cookies.getObject('cookieSession').idUserApi,
+      "adress": response.users.adress,
+      "age": response.users.age,
+      "phone": response.users.phone
+    };
 
-        $scope.getNumber = function() {
-          console.log('hello');
-        }
+        httpService.asyncPost(data).then(function () {
+          console.log('localisation updated');
+        });
+
 
 
       });
@@ -33,7 +35,6 @@ angular.module('starter.controllers', [])
 
     $state.go('login');
   }
-
 })
 
 .controller('UsersCtrl', ['$scope', 'httpService', function($scope, httpService) {
@@ -41,10 +42,7 @@ angular.module('starter.controllers', [])
 
   httpService.asyncGet().then(function (response) {
     $scope.users = response.users;
-    console.log(response.users);
   });
-
-
 }])
 
 .controller('UserDetailCtrl', ['$scope', '$http', '$stateParams', 'httpService', 'NgMap', function($scope, $http, $stateParams, httpService, NgMap) {
@@ -55,24 +53,22 @@ angular.module('starter.controllers', [])
  var users = httpService.asyncGet().then(function (response) {
   var users = response.users;
 
-
   for (var i = 0; i < users.length; i++) {
     if (users[i].idUser == parseInt($stateParams.userId)) {
 
      $scope.user = users[i];
-
    }
  }
-
 }); 
-
 }])
 
 .controller('SettingCtrl', function($scope, $http, $location, $http, httpService, $cookies, $state) {
+
   // settinf logout at off
   $scope.settings = {
     enableFriends: false
   };
+
   //display prfile connected
   var users = httpService.asyncGet().then(function (response) {
     var users = response.users;
@@ -81,24 +77,21 @@ angular.module('starter.controllers', [])
       if (users[i].idUser == $cookies.getObject('cookieSession').idUserApi) {
 
        $scope.user = users[i];
-       console.log($scope.user);
      }
    }
-
  });
 
-  console.log('rien');
+  
   $scope.toogle = function() {
-    console.log('click');
-    console.log($scope.settings.enableFriends);
+
     if ($scope.settings.enableFriends == true) {
       $cookies.remove('cookieSession');
-      $state.go('login');
+      $state.go('login', {reload: true});
     }
   }
+
   //profil update
   $scope.update = function() {
-    var url = 'http://carbillet.net/api-digitalGrenoble/users/'; 
 
     if(!$scope.adress){
       $scope.adress = $scope.user.adress;
@@ -118,67 +111,54 @@ angular.module('starter.controllers', [])
       "phone": $scope.phone
     };
 
-
-    console.log({json: data});
-
-    $http.put(url, {json: data}).then(function(response) {
-      console.log(response.data);
+    httpService.asyncPut(data).then(function(response) {
+      console.log(response);
       $scope.user.age = $scope.age;
       $scope.user.adress = $scope.adress;
       $scope.user.phone = $scope.phone;
       
     });
   }
-
 })
 
 
-.controller('LoginCtrl', function($scope, $http, $ionicPopup, $state, $cookies) {
+.controller('LoginCtrl', function($scope, $http, httpService, $ionicPopup, $state, $cookies) {
 
-  console.log('je suis dans le controller');
 //verify if cokkie exist
-
 if(!$cookies.get('cookieSession')) {
-  ('pas de cookies');
+
+  console.log('pas de cookies');
   var data = {};
 
   $scope.submit = function() {
-    var url = 'http://carbillet.net/api-digitalGrenoble/credentials/'; 
-
-    console.log($scope.username);
 
     data = 
     { 'username': $scope.username, 
     'password': $scope.password
   };
 
+  httpService.asyncPost(data).then(function (response) {
 
-  console.log({json: data});
-
-  $http.post(url, {json: data}).then(function(response) {
-    console.log(response.data);
-
-    if (response.data.statePwdApi != 'ok'){
+    if (response.statePwdApi != 'ok'){
       var alertPopup = $ionicPopup.alert({
        title: 'Attention',
-       template: response.data.errorApi
-
+       template: response.errorApi
      });
     }
 
     else {
-      var now = new Date(),
+      console.log('doit redirection');
+      var now = new Date();
     // this will set the expiration to 12 months
     exp = new Date(now.getFullYear()+1, now.getMonth(), now.getDate());
-    $cookies.putObject('cookieSession', response.data, {'expires': exp});
+    $cookies.putObject('cookieSession', response, {'expires': exp});
+
     $state.go('tab.dash');
   }
 });
 }
-
 }
 else {
-  console.log('cookie donc jy vais');
   $state.go('tab.dash');
 }
 });

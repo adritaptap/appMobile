@@ -11,11 +11,32 @@ angular.module('starter.services', [])
 			});
 
 			return promise;
+		},
+
+
+		asyncPost: function (data) {
+			var promise = $http.post('http://carbillet.net/api-digitalGrenoble/credentials/', {json: data})
+			.then(function (response) {
+
+				return response.data;
+			});
+
+			return promise;
+		},
+		
+		asyncPut: function (data) {
+			var promise = $http.put('http://carbillet.net/api-digitalGrenoble/users/', {json: data})
+			.then(function (response) {
+
+				return response.data;
+			});
+
+			return promise;
 		}
-	};
+	}
 
 
-return httpRequest;
+	return httpRequest;
 	
 	
 });		
