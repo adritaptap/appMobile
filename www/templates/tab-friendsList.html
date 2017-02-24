@@ -3,13 +3,13 @@
     <ion-list>
       <ion-item class="list item-remove-animate item-avatar item-icon-right" ng-repeat="user in users"
                 type="item-text-wrap"
-                ui-sref="tab.friendsDetail({friendId : 1 })">
+                ui-sref="tab.chats-detail({ idUser:user.idUser })">
 
         <img src="/img/ionic.png">
-        <h2>{{users.lastname}} {{users.name}}</h2>
-        <label>Adresse : </label>
-        <p>{{users.adress}}</p>
-        <p>{{ users.idUser }}</p>
+        <h2>{{user.lastname}} {{user.name}}</h2>
+        <span>Adresse : </span>
+        <p>{{user.adress}}</p>
+
 
         <ion-option-button class="button-assertive" ng-click="remove(chat)">
           Delete

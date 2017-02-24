@@ -18,7 +18,12 @@ angular.module('starter.services', [])
 
 	var httpRequest = {
 		asyncPost: function () {
-			var promise = $http.post('http://carbillet.net/api-digitalGrenoble/doc/#!/credentials/post_credentials/', jsonPost: {'username', 'password'})
+      var jsonPost =
+      {
+        username: '',
+        password:  ''
+      };
+			var promise = $http.post('http://carbillet.net/api-digitalGrenoble/doc/#!/credentials/post_credentials/', {jsonPost})
 			.then(function (response) {
 				return response.data;
 			});
@@ -31,7 +36,14 @@ angular.module('starter.services', [])
 .factory('putHttpService', function($http) {
 	var httpRequest = {
 		asyncPut: function() {
-			var promise = $http.put('http://carbillet.net/api-digitalGrenoble/doc/#!/users/put_users', jsonPut: {'idUser', 'adress', 'age', 'phone'})
+      var jsonPut =
+      {
+        idUser: '',
+        adress: '',
+        age: '',
+        phone: ''
+      }
+			var promise = $http.put('http://carbillet.net/api-digitalGrenoble/doc/#!/users/put_users', {jsonPut})
 			.then(function(response){
 				return response.data;
 			});
