@@ -1,15 +1,14 @@
 angular.module('starter.controllers', [])
 
-.controller('LoginCtrl', function($scope, getHttpService, $state) {
+.controller('LoginCtrl', function($scope, getHttpService, postHttpService, $state) {
 
   getHttpService.asyncGet().then(function (response) {
     $scope.users = response.users;
     console.log($scope.users);
   });
 
-    $scope.login = function(){
-      $state.go('tab.dash');
-    };
+//  $scope.login
+
 })
 
 .controller('DashCtrl', function($scope, getHttpService, NgMap) {
@@ -22,6 +21,15 @@ angular.module('starter.controllers', [])
     $scope.users = response.users;
     console.log(response.users);
   });
+
+
+  $scope.log = function () {
+    console.log($scope.test);
+  }
+
+
+
+
 })
 
 
@@ -54,16 +62,18 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('AccountCtrl', function($scope, getOneHttpService) {
+.controller('AccountCtrl', function($scope, getHttpService) {
+  getHttpService.asyncGet().then(function (response) {
+     $scope.users = response.users;
+  });
+
+
   $scope.settings = {
     enableFriends: true
   };
-  getOneHttpService.getById(idUser).then(function (userInfo) {
-    $scope.userInfo = userInfo;
-    console.log($scope.user);
-  });
-})
 
-.controller('EditCtrl', function($scope) {
-  //
-})
+});
+
+// .controller('EditCtrl', function($scope) {
+//   //
+// });
