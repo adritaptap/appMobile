@@ -48,17 +48,14 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope, getHttpService) {
+.controller('LoginCtrl', function($scope, getHttpService, $state) {
 
   getHttpService.asyncGet().then(function (response) {
     $scope.users = response.users;
     console.log($scope.users);
   });
 
-  if ($scope.username == $scope.users.name && $scope.lastname == $scope.users.lastname) {
-
     $scope.login = function(){
       $state.go('tab.dash');
     }
-  }
 });
