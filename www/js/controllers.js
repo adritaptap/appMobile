@@ -1,5 +1,17 @@
 angular.module('starter.controllers', [])
 
+.controller('LoginCtrl', function($scope, getHttpService, $state) {
+
+  getHttpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
+    console.log($scope.users);
+  });
+
+    $scope.login = function(){
+      $state.go('tab.dash');
+    };
+})
+
 .controller('DashCtrl', function($scope, getHttpService, NgMap) {
   NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
@@ -48,14 +60,6 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope, getHttpService, $state) {
-
-  getHttpService.asyncGet().then(function (response) {
-    $scope.users = response.users;
-    console.log($scope.users);
-  });
-
-    $scope.login = function(){
-      $state.go('tab.dash');
-    }
-});
+.controller('EditCtrl', function($scope) {
+  //
+})

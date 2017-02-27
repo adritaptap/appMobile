@@ -86,6 +86,16 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
+  .state('tab.edit', {
+    url: '/edit/:idUser',
+    views: {
+      'tab-edit': {
+        templateUrl: 'templates/tab-edit.html',
+        controller: 'EditCtrl'
+      }
+    }
+  })
+
 
 
   // if none of the above states are matched, use this as the fallback
