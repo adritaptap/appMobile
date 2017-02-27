@@ -8,7 +8,7 @@
 </div>
     <ion-list>
 
-      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users | filter : search" type="item-text-wrap" href="#/tab/users/{{user.idUser}}">
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="user in users | orderBy : 'name' | filter : search" type="item-text-wrap" href="#/tab/users/{{user.idUser}}">
         <img ng-src="{{user.avatar}}">
        
         <h2>{{user.name}}</h2>

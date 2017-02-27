@@ -34,8 +34,8 @@ body, html {
 }
 
 .google-map {  
-  height: 50%;
-  padding: 1%; 
+  height: 60%;
+  padding-top: 1%; 
 }
 .topmarg{
   margin-top: 50px;
