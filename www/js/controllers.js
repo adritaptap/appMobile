@@ -4,7 +4,6 @@ angular.module('starter.controllers', [])
   NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
     console.log('markers', map.markers);
-    console.log('shapes', map.shapes);
   });
 
   getHttpService.asyncGet().then(function (response) {
@@ -49,32 +48,17 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('LoginCtrl', function($scope, $http, $ionicPopup, $state) {
+.controller('LoginCtrl', function($scope, getHttpService) {
 
-  var data = {};
+  getHttpService.asyncGet().then(function (response) {
+    $scope.users = response.users;
+    console.log($scope.users);
+  });
 
-  $scope.submit = function() {
-    var url = 'http://carbillet.net/api-digitalGrenoble/credentials/';
+  if ($scope.username == $scope.users.name && $scope.lastname == $scope.users.lastname) {
 
-    console.log($scope.username);
-
-    var data =
-    {
-      'username': $scope.username,
-      'password': $scope.password
-    };
-
-    console.log({json: data});
-
-    $http.post(url, {json: data}).then(function(response) {
-      console.log(response.data);
-      if (response.data.statePwdApi == 'ok'){
-
-        $state.go('tab.dash');
-
-      } else {
-        var alertPopup = $ionicPopup.alert({title: 'Attention', template: response.data.errorApi});
-      }
-    });
-  };
+    $scope.login = function(){
+      $state.go('tab.dash');
+    }
+  }
 });
