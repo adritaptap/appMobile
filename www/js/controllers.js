@@ -14,6 +14,10 @@ angular.module('starter.controllers', [])
       $scope.$broadcast('scroll.refreshComplete');
     });
   }
+
+  $scope.remove = function(result) {
+    results.splice(results.indexOf(result), 1);
+  }
 })
 
 .controller('FriendDetailCtrl', function($scope, HttpRequest, $stateParams) {
