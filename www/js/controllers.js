@@ -93,29 +93,29 @@ angular.module('starter.controllers', [])
   //profil update
   $scope.update = function() {
 
-    if(!$scope.adress){
-      $scope.adress = $scope.user.adress;
+    if(!$scope.settings.adress){
+      $scope.settings.adress = $scope.user.adress;
     }
-    if(!$scope.age){
-      $scope.age = $scope.user.age;
+    if(!$scope.settings.age){
+      $scope.settings.age = $scope.user.age;
     }
-    if(!$scope.phone){
-      $scope.phone = $scope.user.phone;
+    if(!$scope.settings.phone){
+      $scope.settings.phone = $scope.user.phone;
     }
 
     var data = 
     {
       "idUser": localStorage.getItem('storageSession'),
-      "adress": $scope.adress,
-      "age": $scope.age,
-      "phone": $scope.phone
+      "adress": $scope.settings.adress,
+      "age": $scope.settings.age,
+      "phone": $scope.settings.phone
     };
 
     httpService.asyncPut(data).then(function(response) {
       console.log(response);
-      $scope.user.age = $scope.age;
-      $scope.user.adress = $scope.adress;
-      $scope.user.phone = $scope.phone;
+      $scope.user.age = $scope.settings.age;
+      $scope.user.adress = $scope.settings.adress;
+      $scope.user.phone = $scope.settings.phone;
       
     });
   }
@@ -134,8 +134,8 @@ if(!localStorage.getItem('storageSession')) {
   $scope.submit = function() {
 
     data = 
-    { 'username': $scope.username, 
-    'password': $scope.password
+    { 'username': $scope.login.username, 
+    'password': $scope.login.password
   };
 
   httpService.asyncPost(data).then(function (response) {
