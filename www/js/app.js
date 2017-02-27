@@ -86,8 +86,8 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     }
   })
 
-  .state('tab.edit', {
-    url: '/edit/:idUser',
+  .state('tab.account-edit', {
+    url: '/account/:idUser',
     views: {
       'tab-edit': {
         templateUrl: 'templates/tab-edit.html',
@@ -99,6 +99,6 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/dash');
+  $urlRouterProvider.otherwise('/login');
 
 });

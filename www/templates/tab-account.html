@@ -2,8 +2,8 @@
 <img src="img/fond.jpg" class="fond">
 	<ion-content class="fond">
 		<ion-list>
-			<ion-item ui-sref='tab.edit' class="item item-icon-left ">
-				<i class="icon ion-gear-a energized"></i> Paramètres du compte
+			<ion-item class="item item-icon-left" ui-sref='tab.account-edit({ idUser:user.idUser })'>
+				<i class="icon ion-gear-a energized" ></i> Paramètres du compte
 			</ion-item>
 			<ion-toggle ng-model="settings.enableFriends" toggle-class="toggle-assertive" class="item item-icon-left"	>
 				<i class="icon ion-log-out"></i> Se deconnecter

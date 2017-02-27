@@ -14,6 +14,23 @@ angular.module('starter.services', [])
 	return httpRequest;
 })
 
+.factory('getOneHttpService', function($http) {
+
+	var httpRequest = {
+		getById: function () {
+			var requestUrl = 'http://carbillet.net/api-digitalGrenoble/users/' + idUser;
+			var promise = $http.get('requestUrl')
+			.then(function (response) {
+				return response.data;
+			});
+			return promise;
+		}
+	};
+	return {
+		getById : getById
+	};
+})
+
 .factory('postHttpService', function($http) {
 
 	var httpRequest = {

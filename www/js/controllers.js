@@ -54,10 +54,14 @@ angular.module('starter.controllers', [])
   });
 })
 
-.controller('AccountCtrl', function($scope) {
+.controller('AccountCtrl', function($scope, getOneHttpService) {
   $scope.settings = {
     enableFriends: true
   };
+  getOneHttpService.getById(idUser).then(function (userInfo) {
+    $scope.userInfo = userInfo;
+    console.log($scope.user);
+  });
 })
 
 .controller('EditCtrl', function($scope) {
