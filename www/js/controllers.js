@@ -17,11 +17,13 @@ angular.module('starter.controllers', [])
     $cordovaGeolocation
       .getCurrentPosition(posOptions)
       .then(function (position) {
-        var lat  = position.coords.latitude
-        var long = position.coords.longitude
+        $scope.lat  = position.coords.latitude;
+         $scope.long = position.coords.longitude;
       }, function(err) {
         // error
       });
+
+
 
   NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
