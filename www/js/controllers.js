@@ -11,7 +11,18 @@ angular.module('starter.controllers', [])
 
 })
 
-.controller('DashCtrl', function($scope, getHttpService, NgMap) {
+.controller('DashCtrl', function($scope, getHttpService, $cordovaGeolocation, NgMap) {
+
+  var posOptions = {timeout: 10000, enableHighAccuracy: false};
+    $cordovaGeolocation
+      .getCurrentPosition(posOptions)
+      .then(function (position) {
+        var lat  = position.coords.latitude
+        var long = position.coords.longitude
+      }, function(err) {
+        // error
+      });
+
   NgMap.getMap().then(function(map) {
     console.log(map.getCenter());
     console.log('markers', map.markers);
@@ -22,12 +33,11 @@ angular.module('starter.controllers', [])
     console.log(response.users);
   });
 
+  $scope.user = {};
 
-  $scope.log = function () {
-    console.log($scope.test);
+  $scope.log = function (user) {
+    console.log($scope.user.name);
   }
-
-
 
 
 })
