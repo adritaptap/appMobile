@@ -16,7 +16,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
     .then(function () { 
       console.log('initi ok');
       console.log($cordovaGeolocation
-    .getCurrentPosition());
+        .getCurrentPosition());
     });
     if (window.cordova && window.cordova.plugins && window.cordova.plugins.Keyboard) {
       cordova.plugins.Keyboard.hideKeyboardAccessoryBar(true);
@@ -56,6 +56,7 @@ angular.module('starter', ['ionic', 'starter.controllers', 'starter.services', '
 
   .state('tab.dash', {
     url: '/dash',
+    cache: false,
     views: {
       'tab-dash': {
         templateUrl: 'templates/tab-dash.html',

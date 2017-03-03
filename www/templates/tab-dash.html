@@ -1,6 +1,9 @@
 <ion-view view-title="Retrouvez vos amis">
 
 	<ion-content>
+		<div ng-hide="myGifMap">
+			<img src="img/chargement.png" class="myGif">
+		</div>
 		<ng-map id="map" class="scroll" center="{{lat}},{{long}}" zoom="14" data-tap-disabled="true">
 
 			<div ng-repeat="user in users">

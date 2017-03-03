@@ -2,7 +2,8 @@ angular.module('starter.controllers', [])
 
 .controller('DashCtrl', function($scope, httpService, NgMap, $state, $cordovaGeolocation) {
   if(localStorage.getItem('storageSession')) {
-    console.log(localStorage.getItem('storageSession'));
+  $scope.myGifMap = false;
+
     $cordovaGeolocation
     .getCurrentPosition()
     .then(function (position) {
@@ -12,6 +13,7 @@ angular.module('starter.controllers', [])
       NgMap.getMap();
       
       httpService.asyncGet().then(function (response) {
+        $scope.myGifMap = true;
         $scope.users = response.users;
 
         var data = 
@@ -22,12 +24,7 @@ angular.module('starter.controllers', [])
       "phone": response.users.phone
     };
 
-        httpService.asyncPost(data).then(function () {
-          console.log('localisation updated');
-        });
-
-
-
+       
       });
     });
   }
@@ -39,8 +36,10 @@ angular.module('starter.controllers', [])
 
 .controller('UsersCtrl', ['$scope', 'httpService', function($scope, httpService) {
 
+  $scope.myGif = false;
 
   httpService.asyncGet().then(function (response) {
+    $scope.myGif = true;
     $scope.users = response.users;
   });
 }])
@@ -112,7 +111,7 @@ angular.module('starter.controllers', [])
     };
 
     httpService.asyncPut(data).then(function(response) {
-      console.log(response);
+
       $scope.user.age = $scope.settings.age;
       $scope.user.adress = $scope.settings.adress;
       $scope.user.phone = $scope.settings.phone;
@@ -125,10 +124,9 @@ angular.module('starter.controllers', [])
 .controller('LoginCtrl', function($scope, $http, httpService, $ionicPopup, $state) {
 
 //verify if cokkie exist
-console.log(localStorage.getItem('storageSession'));
+
 if(!localStorage.getItem('storageSession')) {
 
-  console.log('pas de cookies');
   var data = {};
 
   $scope.submit = function() {
@@ -148,7 +146,7 @@ if(!localStorage.getItem('storageSession')) {
     }
 
     else {
-      console.log('doit redirection');
+      
       var keyValue = response.idUserApi;
     //   var now = new Date();
     // // this will set the expiration to 12 months
